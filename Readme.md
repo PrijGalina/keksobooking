@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Галина Коцарь](https://up.htmlacademy.ru/javascript/23/user/848001).
-* Наставник: `Неизвестно`.
+* Наставник: [Никита Победоносцев](https://htmlacademy.ru/profile/nikkypizza).
 
 ---
 
