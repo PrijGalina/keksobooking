@@ -1,22 +1,18 @@
-function getRandomInteger(min, max){
-  min = min < 0 ? 0 : Math.floor(min);
-  max = max > 0 ? Math.floor(max) : 0;
-  if(min < max && max !== 0) {
-    return Math.floor(Math.random() * (max - min + 1) + min);// источник - https://learn.javascript.ru/number
-  }
-  throw new Error('getRandomInteger — максимальное число не может равняться нулю и должно быть больше минимального, значения float округляются до ближайшего целого');
+// Функция взята из интернета и доработана
+// Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
+
+function getRandomPositiveInteger(numValue, otherNumValue) {
+  const lower = Math.ceil(Math.min(Math.abs(numValue), Math.abs(otherNumValue)));
+  const upper = Math.floor(Math.max(Math.abs(numValue), Math.abs(otherNumValue)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
 }
+getRandomPositiveInteger(5, 50);
 
-getRandomInteger(5, 50);
-
-function getRandomFloat(min, max, digitsNum){
-  min = min < 0 ? 0 : min;
-  max = max > 0 ? max : 0;
-  if (min < max && max !== 0) {
-    const randomValue = Math.random() * (max - min) + min;
-    return parseFloat(randomValue.toFixed(digitsNum));
-  }
-  throw new Error('getRandomFloat — максимальное число не может равняться нулю и должно быть больше минимального');
+function getRandomPositiveFloat(numValue, otherNumValue, digits = 1) {
+  const lower = Math.min(Math.abs(numValue), Math.abs(otherNumValue));
+  const upper = Math.max(Math.abs(numValue), Math.abs(otherNumValue));
+  const result = Math.random() * (upper - lower) + lower;
+  return result.toFixed(digits);
 }
-
-getRandomFloat(0.1, 0.5, 3);
+getRandomPositiveFloat(0.1, 0.5, 3);
