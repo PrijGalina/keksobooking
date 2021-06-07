@@ -16,3 +16,25 @@ function getRandomPositiveFloat(numValue, otherNumValue, digits = 1) {
   return result.toFixed(digits);
 }
 getRandomPositiveFloat(0.1, 0.5, 3);
+
+const getAuthor = () => {
+  return {
+    avatar: 'img/avatars/user0' + getRandomPositiveInteger(1, 8) + '.png',
+  };
+};
+
+console.log(getAuthor());
+
+const offer = {
+  title: '',
+  address: '',
+  price: '',
+  type: '',
+  rooms: '',
+  guests: '',
+  checkin: '',
+  checkout: '',
+  features: '',
+  description: '',
+  photos: '',
+}
