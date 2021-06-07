@@ -16,7 +16,7 @@ const getRandomPositiveInteger = function (numValue, otherNumValue) {
   return Math.floor(result);
 };
 
-function getRandomPositiveFloat(numValue, otherNumValue, digits = 1) {
+const getRandomPositiveFloat = function (numValue, otherNumValue, digits = 1) {
   const lower = Math.min(Math.abs(numValue), Math.abs(otherNumValue));
   const upper = Math.max(Math.abs(numValue), Math.abs(otherNumValue));
   const result = Math.random() * (upper - lower) + lower;
@@ -51,7 +51,7 @@ const getRandomArray = function (customArray) {
     const randomIndex = getRandomPositiveInteger(0, newLengthCustomArray - 1);
     newArray[i] = customArray[randomIndex];
     customArray.splice(randomIndex, 1);
-  };
+  }
   return newArray;
 };
 
