@@ -59,10 +59,10 @@ const getRandomArrayElement = (array) => {
 const getShuffledRandomLengthArray = (customArray) => {
   const randomLengthArray = getRandomPositiveInteger(1, customArray.length);
   const newArray = [];
-  for (let index = 0; index <= randomLengthArray-1; index++) {
+  for (let i = 0; i <= randomLengthArray-1; i++) {
     const newLengthCustomArray = customArray.length;
     const randomIndex = getRandomPositiveInteger(0, newLengthCustomArray - 1);
-    newArray[index] = customArray[randomIndex];
+    newArray[i] = customArray[randomIndex];
     customArray.slice(randomIndex, 1);
   }
   return newArray;
