@@ -4,7 +4,8 @@ const CHECK_OUT_TIME = ['12:00','13:00','14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg','https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 const ADS_COUNT = 10;
 const LATITUDE = {
@@ -14,6 +15,18 @@ const LATITUDE = {
 const LONGITUDE = {
   min: 139.70000,
   max: 139.80000,
+};
+const ROOMS = {
+  min: 1,
+  max: 5,
+};
+const GUESTS = {
+  min: 1,
+  max: 12,
+};
+const PRICES = {
+  min: 1000,
+  max: 50000,
 };
 
 const getRandomPositiveInteger = (numValue, otherNumValue) => {
@@ -63,10 +76,10 @@ const getLocation =  () => ({
 const getOffer = (location) => ({
   title: 'Dacha. Дизайнерский домик во Всеволожске',
   address: `${location.lat  }, ${  location.lng}`,
-  price: getRandomPositiveInteger(1000, 50000),
+  price: getRandomPositiveInteger(PRICES.min, PRICES.max),
   type: getRandomArrayElement(LODGINGS),
-  rooms: getRandomPositiveInteger(1, 5),
-  guests: getRandomPositiveInteger(1, 12),
+  rooms: getRandomPositiveInteger(ROOMS.min, ROOMS.max),
+  guests: getRandomPositiveInteger(GUESTS.min, GUESTS.max),
   checkin: getRandomArrayElement(CHECK_IN_TIME),
   checkout: getRandomArrayElement(CHECK_OUT_TIME),
   features: getShuffledRandomLengthArray(FEATURES),
