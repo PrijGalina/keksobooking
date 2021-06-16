@@ -1,4 +1,1 @@
-import {adSet} from './data.js';
-
-adSet;
-//console.log(adSet);
+import './generating-ads.js';
