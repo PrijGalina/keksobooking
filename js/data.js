@@ -31,6 +31,14 @@ const PRICES = {
   max: 50000,
 };
 
+const HOUSING_TYPE = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
+};
+
 const getAuthor = () => ({
   avatar: `img/avatars/user0${getRandomPositiveInteger(1, 8)}.png`,
 });
@@ -65,4 +73,4 @@ const createAd = () => {
 
 const adSet = new Array(ADS_COUNT).fill(null).map(createAd);
 
-export {adSet};
+export {adSet, HOUSING_TYPE};

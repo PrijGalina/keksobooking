@@ -33,4 +33,12 @@ const getShuffledRandomLengthArray = (customArray) => {
   return newArray;
 };
 
-export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray};
+const getDeclension = (number, titlesArr) => {
+  // getDeclension(11, ['гостя', 'гостей', 'гостей']) ==> 'гостей'
+  // в массиве слова идут по порядку для чисел 1(гостя), 4(гостей), 10(гостей) и тд
+  const cases = [2, 0, 1, 1, 1, 2];
+  return titlesArr[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+};
+
+
+export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension};
