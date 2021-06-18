@@ -1028,3 +1028,11 @@ fieldset {
 .hidden {
   display: none;
 }
+
+.popup__title:empty,
+.popup__text:empty,
+.popup__type:empty,
+.popup__features:empty,
+.popup__description:empty {
+  display: none;
+}
