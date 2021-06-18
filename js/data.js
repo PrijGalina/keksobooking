@@ -71,6 +71,20 @@ const createAd = () => {
   };
 };
 
+const formElement = document.querySelector('.ad-form');
+const FORM_FIELD = {
+  selects: formElement.querySelectorAll('select'),
+  buttons: formElement.querySelectorAll('button'),
+  inputs: formElement.querySelectorAll('input'),
+  textareas: formElement.querySelectorAll('textarea'),
+};
+
+const filterElement = document.querySelector('.map__filters');
+const FILTER_FIELD = {
+  selects: filterElement.querySelectorAll('select'),
+  inputs: filterElement.querySelectorAll('input'),
+};
+
 const adSet = new Array(ADS_COUNT).fill(null).map(createAd);
 
-export {adSet, HOUSING_TYPE};
+export {adSet, HOUSING_TYPE, FORM_FIELD, FILTER_FIELD, formElement, filterElement};
