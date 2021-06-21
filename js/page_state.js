@@ -1,18 +1,11 @@
-import {formElement,FORM_FIELD,filterElement,FILTER_FIELD} from './data.js';
-import {changeAttributeDisabled} from './util.js';
+import {formElement,filterElement} from './data.js';
+import {toggleDisabledOnFormNodes} from './util.js';
 
-const setActive = () => {
-  formElement.classList.remove('ad-form--disabled');
-  filterElement.classList.remove('ad-form--disabled');
-  changeAttributeDisabled(FILTER_FIELD, false);
-  changeAttributeDisabled(FORM_FIELD, false);
+const togglePageActiveState = (bool) => {
+  formElement.classList.toggle('ad-form--disabled', bool); // метод toggle умеет принимать второй аргумент. Это удобно как раз для таких случаев
+  filterElement.classList.toggle('ad-form--disabled', bool);
+  toggleDisabledOnFormNodes(formElement, bool); // можно объединить в одну функцию учитывая, что обе формы у нас отключаются/включаются одновременно
+  toggleDisabledOnFormNodes(filterElement, bool);
 };
 
-const setInactive = () => {
-  formElement.classList.add('ad-form--disabled');
-  filterElement.classList.add('ad-form--disabled');
-  changeAttributeDisabled(FILTER_FIELD, true);
-  changeAttributeDisabled(FORM_FIELD, true);
-};
-
-export {setActive,setInactive};
+export {togglePageActiveState};
