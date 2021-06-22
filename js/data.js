@@ -39,6 +39,14 @@ const HOUSING_TYPE = {
   hotel: 'Отель',
 };
 
+const HOUSING_MIN_PRICE = {
+  flat: 1000,
+  bungalow: 0,
+  house: 5000,
+  palace: 10000,
+  hotel: 3000,
+};
+
 const getAuthor = () => ({
   avatar: `img/avatars/user0${getRandomPositiveInteger(1, 8)}.png`,
 });
@@ -76,4 +84,4 @@ const filterElement = document.querySelector('.map__filters');
 
 const adSet = new Array(ADS_COUNT).fill(null).map(createAd);
 
-export {adSet, HOUSING_TYPE, formElement, filterElement};
+export {adSet, HOUSING_TYPE, formElement, filterElement, HOUSING_MIN_PRICE};
