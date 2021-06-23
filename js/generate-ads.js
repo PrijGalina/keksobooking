@@ -10,7 +10,7 @@ const generateAds = (ads) => {
     adElement.querySelector('.popup__title').textContent = ad.offer.title || '';
     adElement.querySelector('.popup__text--address').textContent = ad.offer.address || '';
     adElement.querySelector('.popup__text--price').innerHTML = ad.offer.price ? `${ad.offer.price}<span>₽/ночь</span>` : '';
-    adElement.querySelector('.popup__type').textContent = HOUSING_TYPE[ad.offer.type] || '';
+    adElement.querySelector('.popup__type').textContent = HOUSING_TYPE[ad.offer.type].name || '';
     adElement.querySelector('.popup__text--capacity').textContent = (ad.offer.guests && ad.offer.rooms) ? `${ad.offer.rooms} ${getDeclension(ad.offer.rooms, ['комната', 'комнаты', 'комнат'])} для ${ad.offer.guests} ${getDeclension(ad.offer.guests, ['гостя', 'гостей', 'гостей'])}` : '';
     adElement.querySelector('.popup__text--time').textContent = (ad.offer.checkin && ad.offer.checkout) ? `Заезд после ${ad.offer.checkin}, выезд до ${ad.offer.checkout}` : '';
     adElement.querySelector('.popup__description').textContent = ad.offer.description || '';

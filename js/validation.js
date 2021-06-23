@@ -1,12 +1,12 @@
-import {formElement, HOUSING_MIN_PRICE} from './data.js';
-const adTitleInput = formElement.querySelector('#title');
-const typeSelect = formElement.querySelector('#type');
-const priceInput = formElement.querySelector('#price');
-const countRoomsSelect = formElement.querySelector('#room_number');
-const countGuestsSelect = formElement.querySelector('#capacity');
+import {adForm, HOUSING_TYPE,ROOMS_FOR_GUESTS_MAP} from './data.js';
+const adTitleInput = adForm.querySelector('#title');
+const typeSelect = adForm.querySelector('#type');
+const priceInput = adForm.querySelector('#price');
+const countRoomsSelect = adForm.querySelector('#room_number');
+const countGuestsSelect = adForm.querySelector('#capacity');
 
 const valuePriceCheck = () => {
-  priceInput.min = HOUSING_MIN_PRICE[typeSelect.value];
+  priceInput.min = HOUSING_TYPE[typeSelect.value].minPrice;
   (Number(priceInput.value) < Number(priceInput.min)) ? priceInput.setCustomValidity(`Минимальная цена за ночь ${  priceInput.min}`) : priceInput.setCustomValidity('');
   priceInput.reportValidity();
 };
@@ -28,7 +28,7 @@ adTitleInput.addEventListener('input', () => {
 });
 
 typeSelect.addEventListener('change', () => {
-  priceInput.placeholder = String(HOUSING_MIN_PRICE[typeSelect.value]);
+  priceInput.placeholder = String(HOUSING_TYPE[typeSelect.value].minPrice);
   if(priceInput.value.length > 0) {
     valuePriceCheck();
   }
@@ -39,27 +39,9 @@ priceInput.addEventListener('input', () => {
 });
 
 countRoomsSelect.addEventListener('change', (e) => {
-  switch (e.target.value) {
-    case '100':
-      for (let i = 0; i <= countGuestsSelect.options.length - 1; i++) {
-        countGuestsSelect.options[i].attributes.value.nodeValue !== '0' ? countGuestsSelect.options[i].disabled = true : countGuestsSelect.options[i].disabled = false;
-      }
-      break;
-    case '1':
-      for (let i = 0; i <= countGuestsSelect.options.length - 1; i++) {
-        countGuestsSelect.options[i].attributes.value.nodeValue !== '1' ? countGuestsSelect.options[i].disabled = true : countGuestsSelect.options[i].disabled = false;
-      }
-      break;
-    case '2':
-      for (let i = 0; i <= countGuestsSelect.options.length - 1; i++) {
-        ((countGuestsSelect.options[i].attributes.value.nodeValue !== '1') && (countGuestsSelect.options[i].attributes.value.nodeValue !== '2')) ? countGuestsSelect.options[i].disabled = true : countGuestsSelect.options[i].disabled = false;
-      }
-      break;
-    case '3':
-      for (let i = 0; i <= countGuestsSelect.options.length - 1; i++) {
-        (countGuestsSelect.options[i].attributes.value.nodeValue !== '1' && countGuestsSelect.options[i].attributes.value.nodeValue !== '2' && countGuestsSelect.options[i].attributes.value.nodeValue !== '3') ? countGuestsSelect.options[i].disabled = true : countGuestsSelect.options[i].disabled = false;
-      }
-      break;
+  const POSSIBLE_NUMBER_ROOMS = ROOMS_FOR_GUESTS_MAP[e.target.value];
+  for (let i = 0; i <= countGuestsSelect.length - 1; i++) {
+    (POSSIBLE_NUMBER_ROOMS.includes(countGuestsSelect[i].value)) ? countGuestsSelect[i].disabled = false : countGuestsSelect[i].disabled = true;
   }
-
+  console.log(countGuestsSelect);
 });
