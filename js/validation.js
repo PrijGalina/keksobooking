@@ -5,21 +5,37 @@ const priceInput = formElement.querySelector('#price');
 const countRoomsSelect = formElement.querySelector('#room_number');
 const countGuestsSelect = formElement.querySelector('#capacity');
 
-adTitleInput.addEventListener('invalid', () => {
-  if (adTitleInput.validity.tooShort) {
-    adTitleInput.setCustomValidity('Минимальная длина заголовка объявления - 30 символов');
-  } else if (adTitleInput.validity.tooLong) {
-    adTitleInput.setCustomValidity('Заголовок объявления не может быть длинее 100 символов');
-  } else if (adTitleInput.validity.valueMissing) {
-    adTitleInput.setCustomValidity('Обязательное поле');
-  } else {
+const valuePriceCheck = () => {
+  priceInput.min = HOUSING_MIN_PRICE[typeSelect.value];
+  (Number(priceInput.value) < Number(priceInput.min)) ? priceInput.setCustomValidity(`Минимальная цена за ночь ${  priceInput.min}`) : priceInput.setCustomValidity('');
+  priceInput.reportValidity();
+};
+
+adTitleInput.addEventListener('input', () => {
+  const valueLength = adTitleInput.value.length;
+  const valueMin = adTitleInput.attributes.minlength.value;
+  const valueMax = adTitleInput.attributes.maxlength.value;
+  if (valueLength < valueMin) {
+    adTitleInput.setCustomValidity(`Ещё ${valueMin - valueLength} симв.`);
+  }
+  else if (valueLength > valueMax) {
+    adTitleInput.setCustomValidity(`Удалите лишние ${valueLength - valueMax} симв.`);
+  }
+  else {
     adTitleInput.setCustomValidity('');
   }
+  adTitleInput.reportValidity();
 });
 
 typeSelect.addEventListener('change', () => {
-  priceInput.min = HOUSING_MIN_PRICE[typeSelect.value];
   priceInput.placeholder = String(HOUSING_MIN_PRICE[typeSelect.value]);
+  if(priceInput.value.length > 0) {
+    valuePriceCheck();
+  }
+});
+
+priceInput.addEventListener('input', () => {
+  valuePriceCheck();
 });
 
 countRoomsSelect.addEventListener('change', (e) => {
@@ -46,16 +62,4 @@ countRoomsSelect.addEventListener('change', (e) => {
       break;
   }
 
-});
-
-formElement.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const indexSelectedOption = countGuestsSelect.options.selectedIndex;
-  if (countGuestsSelect.options[indexSelectedOption].disabled === true) {
-    countGuestsSelect.setCustomValidity('Недопустимое значение количества мест');
-  }
-  else {
-    countGuestsSelect.setCustomValidity('');
-    formElement.submit();
-  }
 });
