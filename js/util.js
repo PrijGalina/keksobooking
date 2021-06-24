@@ -1,5 +1,3 @@
-import {adForm,filterForm} from './data.js';
-
 const getRandomPositiveInteger = (numValue, otherNumValue) => {
   // Функция взята из интернета и доработана,
   //Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
@@ -42,12 +40,4 @@ const getDeclension = (number, titlesArr) => {
   return titlesArr[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
 };
 
-const toggleDisabledOnFormNodes = (isDisabled) => {
-  [adForm, filterForm].forEach((form) => {
-    for (const element of form.elements) {
-      element.disabled = isDisabled;
-    }
-  });
-};
-
-export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension, toggleDisabledOnFormNodes};
+export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension};
