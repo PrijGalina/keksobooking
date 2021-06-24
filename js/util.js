@@ -40,13 +40,4 @@ const getDeclension = (number, titlesArr) => {
   return titlesArr[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
 };
 
-const changeAttributeDisabled = (object, boolin) => {
-  const keys = Object.keys(object);
-  keys.forEach((key) => {
-    object[key].forEach((el) => {
-      el.disabled = boolin;
-    });
-  });
-};
-
-export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension, changeAttributeDisabled};
+export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension};
