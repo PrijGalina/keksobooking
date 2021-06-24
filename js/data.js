@@ -20,10 +20,10 @@ const LONGITUDE = {
   max: 139.80000,
 };
 const ROOMS_FOR_GUESTS_MAP = {
+  100: ['0'],
   1: ['1'],
   2: ['1', '2'],
   3: ['1', '2', '3'],
-  100: ['0'],
 };
 const ROOMS = {
   min: 1,
