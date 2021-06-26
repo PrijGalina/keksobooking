@@ -12,3 +12,11 @@ adForm['room_number'].addEventListener('change', (e) => {
   }
   adForm.capacity.value = POSSIBLE_NUMBER_ROOMS[0];
 });
+
+adForm['timein'].addEventListener('change', () => {
+  adForm['timeout'].value = adForm['timein'].value;
+});
+
+adForm['timeout'].addEventListener('change', () => {
+  adForm['timein'].value = adForm['timeout'].value;
+});
