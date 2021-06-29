@@ -1,5 +1,3 @@
-import {togglePageActiveState} from './page-state.js';
+import './page-state.js';
 import './validation.js';
-import './get-map.js';
-
-togglePageActiveState(true);
+import './map.js';

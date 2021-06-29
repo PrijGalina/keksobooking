@@ -2,7 +2,6 @@ import {HOUSING_TYPE} from './data.js';
 import {getDeclension} from './util.js';
 
 const generateAd = (ad) => {
-  const adsFragment = document.createDocumentFragment();
   const adsTemplate = document.querySelector('#card').content.querySelector('.popup');
   const adElement = adsTemplate.cloneNode(true);
   ad.author.avatar ? adElement.querySelector('.popup__avatar').src = ad.author.avatar : adElement.querySelector('.popup__avatar').classList.add('hidden');
@@ -41,8 +40,7 @@ const generateAd = (ad) => {
   else {
     adElement.querySelector('.popup__photos').classList.add('hidden');
   }
-  adsFragment.appendChild(adElement);
-  return adsFragment;
+  return adElement;
 };
 
 export {generateAd};

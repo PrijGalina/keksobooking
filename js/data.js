@@ -19,6 +19,10 @@ const LONGITUDE = {
   min: 139.70000,
   max: 139.80000,
 };
+const COORDINATES_TOKYO = {
+  lat: 35.6804,
+  lng: 139.769,
+};
 const ROOMS_FOR_GUESTS_MAP = {
   100: ['0'],
   1: ['1'],
@@ -89,4 +93,4 @@ const createAd = () => {
 };
 const adSet = new Array(ADS_COUNT).fill(null).map(createAd);
 
-export {adSet, HOUSING_TYPE, adForm, filterForm,ROOMS_FOR_GUESTS_MAP};
+export { adSet, HOUSING_TYPE, adForm, filterForm, ROOMS_FOR_GUESTS_MAP, COORDINATES_TOKYO};
