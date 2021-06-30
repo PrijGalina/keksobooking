@@ -14,4 +14,6 @@ const togglePageActiveState = (bool) => {
   toggleDisabledOnFormNodes(bool);
 };
 
+togglePageActiveState(true);
+
 export {togglePageActiveState};
