@@ -1,9 +1,9 @@
 import {HOUSING_TYPE} from './data.js';
 import {getDeclension} from './util.js';
 
+const adsTemplate = document.querySelector('#card').content.querySelector('.popup');
+
 const generateAd = (ad) => {
-  console.log(ad);
-  const adsTemplate = document.querySelector('#card').content.querySelector('.popup');
   const adElement = adsTemplate.cloneNode(true);
   ad.author.avatar ? adElement.querySelector('.popup__avatar').src = ad.author.avatar : adElement.querySelector('.popup__avatar').classList.add('hidden');
   adElement.querySelector('.popup__title').textContent = ad.offer.title || '';

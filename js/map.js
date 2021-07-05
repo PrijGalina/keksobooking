@@ -1,6 +1,5 @@
 import { generateAd } from './generate-ad.js';
 import { adForm, COORDINATES_TOKYO } from './data.js';
-import {adSet} from './api.js';
 import { togglePageActiveState } from './page-state.js';
 
 const PinSetting = {
@@ -69,18 +68,18 @@ const createMarker = (ad) => {
   return marker;
 };
 
-console.log(adSet);
+const createOtherMarker = (adArrayData) => {
+  Object.values(adArrayData).forEach((ad) => {
+    const marker = createMarker(ad);
+    marker
+      .addTo(markerGroup)
+      .bindPopup(
+        generateAd(ad),
+        {
+          keepInView: true,
+        },
+      );
+  });
+};
 
-adSet.forEach((ad) => {
-  const marker = createMarker(ad);
-  marker
-    .addTo(markerGroup)
-    .bindPopup(
-      generateAd(ad),
-      {
-        keepInView: true,
-      },
-    );
-});
-
-export { map };
+export { map, createOtherMarker };

@@ -40,4 +40,29 @@ const getDeclension = (number, titlesArr) => {
   return titlesArr[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
 };
 
-export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension};
+const ALERT_SHOW_TIME = 5000;
+
+const onFail = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.display = 'flex';
+  alertContainer.style.alignItems = 'center';
+  alertContainer.style.zIndex = 500;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '50%';
+  alertContainer.style.top = '50%';
+  alertContainer.style.width = '300px';
+  alertContainer.style.height = '200px';
+  alertContainer.style.padding = '10px 35px';
+  alertContainer.style.fontSize = '18px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'white';
+  alertContainer.style.transform = 'translate(-50%, -50%)';
+  alertContainer.textContent = message;
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension, onFail};
