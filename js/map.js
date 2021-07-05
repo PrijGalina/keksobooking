@@ -1,5 +1,6 @@
 import { generateAd } from './generate-ad.js';
-import { adForm, adSet, COORDINATES_TOKYO } from './data.js';
+import { adForm, COORDINATES_TOKYO } from './data.js';
+import {adSet} from './api.js';
 import { togglePageActiveState } from './page-state.js';
 
 const PinSetting = {
@@ -67,6 +68,8 @@ const createMarker = (ad) => {
   );
   return marker;
 };
+
+console.log(adSet);
 
 adSet.forEach((ad) => {
   const marker = createMarker(ad);

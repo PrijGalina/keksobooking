@@ -62,7 +62,7 @@ const HOUSING_TYPE = {
     name: 'Отель',
     minPrice: 3000,
   },
-};
+};/*
 const getAuthor = () => ({
   avatar: `img/avatars/user0${getRandomPositiveInteger(1, 8)}.png`,
 });
@@ -92,5 +92,5 @@ const createAd = () => {
   };
 };
 const adSet = new Array(ADS_COUNT).fill(null).map(createAd);
-
-export { adSet, HOUSING_TYPE, adForm, filterForm, ROOMS_FOR_GUESTS_MAP, COORDINATES_TOKYO};
+*/
+export {HOUSING_TYPE, adForm, filterForm, ROOMS_FOR_GUESTS_MAP, COORDINATES_TOKYO};

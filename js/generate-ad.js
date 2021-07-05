@@ -2,6 +2,7 @@ import {HOUSING_TYPE} from './data.js';
 import {getDeclension} from './util.js';
 
 const generateAd = (ad) => {
+  console.log(ad);
   const adsTemplate = document.querySelector('#card').content.querySelector('.popup');
   const adElement = adsTemplate.cloneNode(true);
   ad.author.avatar ? adElement.querySelector('.popup__avatar').src = ad.author.avatar : adElement.querySelector('.popup__avatar').classList.add('hidden');
