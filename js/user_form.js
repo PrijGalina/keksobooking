@@ -1,16 +1,41 @@
-import {onFail} from './util.js';
 import {sendData} from './api.js';
 import {adForm} from './data.js';
 
+const ERROR_MESSAGE_TEMPLATE = document.querySelector('#error').content.querySelector('.error');
+const SUCCESS_MESSAGE_TEMPLATE = document.querySelector('#success').content.querySelector('.success');
+
+const close = () => {
+  document.querySelector('.user-message').remove();
+  document.removeEventListener('keydown', add);
+};
+
+const add = (e) => {
+  e.preventDefault();
+  (e.key === 'Escape' || e.key === 'Esc') || e.type === 'click' ? close() : '';
+};
+
+const displayMessage = (template) => {
+  const message = template.cloneNode(true);
+  document.body.appendChild(message);
+  document.addEventListener('keydown', add);
+  message.addEventListener('click', add);
+};
+
 const setUserFormSubmit = (onSuccess) => {
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+  adForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
     sendData(
       () => onSuccess(),
-      () => onFail('Не удалось отправить форму. Попробуйте ещё раз'),
-      new FormData(evt.target),
+      () => displayMessage(ERROR_MESSAGE_TEMPLATE),
+      formData,
     );
   });
 };
 
-export {setUserFormSubmit};
+const clearForm = () => {
+  adForm.reset();
+  displayMessage(SUCCESS_MESSAGE_TEMPLATE);
+};
+
+export {setUserFormSubmit, displayMessage, clearForm};
