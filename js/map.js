@@ -1,6 +1,8 @@
 import { generateAd } from './generate-ad.js';
-import { adForm, COORDINATES_TOKYO } from './data.js';
+import { adForm, filterForm, COORDINATES_TOKYO } from './data.js';
 import { togglePageActiveState } from './page-state.js';
+import {getData, onDataGetSuccess} from './api.js';
+import { onFail } from './util.js';
 
 const PinSetting = {
   MAIN: {
@@ -18,15 +20,35 @@ const PinSetting = {
 const mainPinIcon = L.icon(PinSetting.MAIN);
 
 const pinIcon = L.icon(PinSetting.REGULAR);
+let initMap = false;
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    togglePageActiveState(false);
+    togglePageActiveState(false, adForm);
+    initMap = true;
   })
   .setView({
     lat: COORDINATES_TOKYO.lat,
     lng: COORDINATES_TOKYO.lng,
   }, 14);
+
+const myPromise = new Promise((resolve, reject) => {
+  if (initMap) {
+    resolve();
+  } else {
+    reject();
+  }
+});
+
+myPromise
+  .then(() => {
+    getData(onDataGetSuccess, onFail);
+  })
+  .then((res) => {
+
+    togglePageActiveState(false, filterForm);
+  })
+  .catch(() => {});
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -82,4 +104,12 @@ const createOtherMarker = (adArrayData) => {
   });
 };
 
-export { map, createOtherMarker };
+const refreshMap = () => {
+  map.setView({
+    lat: COORDINATES_TOKYO.lat,
+    lng: COORDINATES_TOKYO.lng,
+  }, 14);
+  MainMarker.setLatLng(L.latLng(COORDINATES_TOKYO.lat,COORDINATES_TOKYO.lng));
+};
+
+export {MainMarker, createOtherMarker, refreshMap, markerGroup, map};
