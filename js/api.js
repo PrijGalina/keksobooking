@@ -2,24 +2,9 @@
 import {createOtherMarker, markerGroup} from './map.js';
 import {filterForm} from './data.js';
 import {getSortData, getFilteredData} from './filter.js';
+import {debounce} from './utils/debounce.js';
 
 const RERENDER_DELAY = 500;
-
-const debounce = (func, wait, immediate) => {
-  let timeout = 0;
-  return function() {
-    const context = this;
-    const args = arguments;
-    const later = () => {
-      timeout = null;
-      (!immediate) ? func.apply(context, args) : '';
-    };
-    const callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    (callNow) ? func.apply(context, args) : '';
-  };
-};
 
 const SERVER_ADDRESSES = {
   GET: 'https://23.javascript.pages.academy/keksobooking/data',
