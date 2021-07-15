@@ -44,8 +44,7 @@ myPromise
   .then(() => {
     getData(onDataGetSuccess, onFail);
   })
-  .then((res) => {
-
+  .then(() => {
     togglePageActiveState(false, filterForm);
   })
   .catch(() => {});
