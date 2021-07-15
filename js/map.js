@@ -1,7 +1,7 @@
 import { generateAd } from './generate-ad.js';
 import { adForm, filterForm, COORDINATES_TOKYO } from './data.js';
 import { togglePageActiveState } from './page-state.js';
-import {getData, onDataGetSuccess} from './api.js';
+import { getData, onDataGetSuccess } from './api.js';
 import { onFail } from './util.js';
 
 const PinSetting = {
@@ -104,10 +104,7 @@ const createOtherMarker = (adArrayData) => {
 };
 
 const refreshMap = () => {
-  map.setView({
-    lat: COORDINATES_TOKYO.lat,
-    lng: COORDINATES_TOKYO.lng,
-  }, 14);
+  map.setView(COORDINATES_TOKYO, 14);
   MainMarker.setLatLng(L.latLng(COORDINATES_TOKYO.lat,COORDINATES_TOKYO.lng));
 };
 

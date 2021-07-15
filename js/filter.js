@@ -1,19 +1,19 @@
 
-import {filterForm} from './data.js';
+import {filterForm, PRICE_MAP, VALUE_OF_ALL_ADS} from './data.js';
 
-const FilterByType = (element) => (filterForm.elements['housing-type'].value === 'any') ? element : element.offer.type === filterForm.elements['housing-type'].value;
+const filterByType = (element) => (filterForm.elements['housing-type'].value === VALUE_OF_ALL_ADS) ? element : element.offer.type === filterForm.elements['housing-type'].value;
 
-const FilterByPrice = (element) => {
+const filterByPrice = (element) => {
   let adPrice = '';
-  (element.offer.price < 10000) ? adPrice = 'low' : '';
-  ((element.offer.price >= 10000) && (element.offer.price < 50000)) ? adPrice = 'middle' : '';
-  (element.offer.price >= 50000) ? adPrice = 'high' : '';
-  return (filterForm.elements['housing-price'].value === 'any') ? element : adPrice === filterForm.elements['housing-price'].value;
+  (element.offer.price < PRICE_MAP.low.max) ? adPrice = 'low' : '';
+  ((element.offer.price >= PRICE_MAP.middle.min) && (element.offer.price < PRICE_MAP.middle.max)) ? adPrice = 'middle' : '';
+  (element.offer.price >= PRICE_MAP.high.min) ? adPrice = 'high' : '';
+  return (filterForm.elements['housing-price'].value === VALUE_OF_ALL_ADS) ? element : adPrice === filterForm.elements['housing-price'].value;
 };
 
-const FilterByRooms = (element) => (filterForm.elements['housing-rooms'].value === 'any') ? element : +element.offer.rooms === +filterForm.elements['housing-rooms'].value ;
+const filterByRooms = (element) => (filterForm.elements['housing-rooms'].value === VALUE_OF_ALL_ADS) ? element : +element.offer.rooms === +filterForm.elements['housing-rooms'].value ;
 
-const FilterByGuests = (element) => (filterForm.elements['housing-guests'].value === 'any') ? element : +element.offer.guests === +filterForm.elements['housing-guests'].value;
+const filterByGuests = (element) => (filterForm.elements['housing-guests'].value === VALUE_OF_ALL_ADS) ? element : +element.offer.guests === +filterForm.elements['housing-guests'].value;
 
 const getCheckedCheckbox = () => {
   const featureCheckedCheckboxs = [];
@@ -31,7 +31,7 @@ const getRankAd = (element, list) => {
   return intersection.length;
 };
 
-const FilterByFeatures = (element) => {
+const filterByFeatures = (element) => {
   const checkedCheckboxs = getCheckedCheckbox();
   if (checkedCheckboxs.length !== 0) {
     const elementRank = (element.offer.features) ? getRankAd(element, checkedCheckboxs) : 0;
@@ -59,6 +59,6 @@ const getSortData = (element, elementNext) => {
   }
 };
 
-const getFilteredData = (pin) => pin.filter(FilterByType).filter(FilterByPrice).filter(FilterByRooms).filter(FilterByGuests).filter(FilterByFeatures);
+const getFilteredData = (pin) => pin.filter(filterByType).filter(filterByPrice).filter(filterByRooms).filter(filterByGuests).filter(filterByFeatures);
 
 export {getSortData, getFilteredData};
