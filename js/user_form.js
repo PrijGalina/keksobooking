@@ -1,24 +1,31 @@
 import {sendData} from './api.js';
 import {adForm} from './data.js';
+import {refreshMap} from './map.js';
 
 const ERROR_MESSAGE_TEMPLATE = document.querySelector('#error').content.querySelector('.error');
 const SUCCESS_MESSAGE_TEMPLATE = document.querySelector('#success').content.querySelector('.success');
 
-const close = () => {
+const closeMessage = () => {
   document.querySelector('.user-message').remove();
-  document.removeEventListener('keydown', add);
+  document.removeEventListener('keydown', KeydownHandler);
+  document.removeEventListener('click', ClickHandler);
 };
 
-const add = (e) => {
+function KeydownHandler(e) {
   e.preventDefault();
-  (e.key === 'Escape' || e.key === 'Esc') || e.type === 'click' ? close() : '';
-};
+  (e.key === 'Escape' || e.key === 'Esc') ? closeMessage() : '';
+}
+
+function ClickHandler(e) {
+  e.preventDefault();
+  closeMessage();
+}
 
 const displayMessage = (template) => {
   const message = template.cloneNode(true);
   document.body.appendChild(message);
-  document.addEventListener('keydown', add);
-  message.addEventListener('click', add);
+  document.addEventListener('keydown', KeydownHandler);
+  document.addEventListener('click', ClickHandler);
 };
 
 const setUserFormSubmit = (onSuccess) => {
@@ -37,5 +44,10 @@ const clearForm = () => {
   adForm.reset();
   displayMessage(SUCCESS_MESSAGE_TEMPLATE);
 };
+
+
+adForm.addEventListener('reset', () => {
+  refreshMap();
+});
 
 export {setUserFormSubmit, displayMessage, clearForm};

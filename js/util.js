@@ -43,25 +43,12 @@ const getDeclension = (number, titlesArr) => {
 const ALERT_SHOW_TIME = 5000;
 
 const onFail = (message) => {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.display = 'flex';
-  alertContainer.style.alignItems = 'center';
-  alertContainer.style.zIndex = 500;
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = '50%';
-  alertContainer.style.top = '50%';
-  alertContainer.style.width = '300px';
-  alertContainer.style.height = '200px';
-  alertContainer.style.padding = '10px 35px';
-  alertContainer.style.fontSize = '18px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'white';
-  alertContainer.style.transform = 'translate(-50%, -50%)';
-  alertContainer.textContent = message;
-  document.body.append(alertContainer);
+  const alertContainer = document.querySelector('.loading-info');
+  alertContainer.querySelector('p').textContent = message;
+  alertContainer.classList.remove('visually-hidden');
 
   setTimeout(() => {
-    alertContainer.remove();
+    alertContainer.classList.add('visually-hidden');
   }, ALERT_SHOW_TIME);
 };
 

@@ -1,19 +1,17 @@
-import {adForm,filterForm} from './data.js';
+import {adForm, filterForm} from './data.js';
 
-const toggleDisabledOnFormNodes = (isDisabled) => {
-  [adForm, filterForm].forEach((form) => {
-    for (const element of form.elements) {
-      element.disabled = isDisabled;
-    }
-  });
+const toggleDisabledOnFormNodes = (isDisabled, pageElement) => {
+  for (const element of pageElement.elements) {
+    element.disabled = isDisabled;
+  }
 };
 
-const togglePageActiveState = (bool) => {
-  adForm.classList.toggle('ad-form--disabled', bool);
-  filterForm.classList.toggle('ad-form--disabled', bool);
-  toggleDisabledOnFormNodes(bool);
+const togglePageActiveState = (bool, pageElement) => {
+  pageElement.classList.toggle('ad-form--disabled', bool);
+  toggleDisabledOnFormNodes(bool, pageElement);
 };
 
-togglePageActiveState(true);
+togglePageActiveState(true, adForm);
+togglePageActiveState(true, filterForm);
 
 export {togglePageActiveState};

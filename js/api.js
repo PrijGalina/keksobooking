@@ -1,21 +1,55 @@
-import {createOtherMarker} from './map.js';
+
+import {createOtherMarker, markerGroup} from './map.js';
+import {filterForm} from './data.js';
+import {getSortData, getFilteredData} from './filter.js';
+import {debounce} from './utils/debounce.js';
+
+const RERENDER_DELAY = 500;
 
 const SERVER_ADDRESSES = {
-  forGetting: 'https://23.javascript.pages.academy/keksobooking/data',
-  toSend: 'https://23.javascript.pages.academy/keksobooking',
+  GET: 'https://23.javascript.pages.academy/keksobooking/data',
+  POST: 'https://23.javascript.pages.academy/keksobooking',
 };
 
-const getData = (onSuccess, onFail) => {
-  fetch(SERVER_ADDRESSES.forGetting)
+const ADS_COUNT = 10;
+
+const renderMarker = (dataQ) => {
+  markerGroup.clearLayers();
+  const data = getFilteredData(dataQ);
+  data.sort(getSortData);
+  const filterArray = data.slice(0, ADS_COUNT);
+  createOtherMarker(filterArray);
+};
+
+const setFilterChange = (dataArray) => {
+  filterForm.addEventListener('change', debounce(() => renderMarker(dataArray), RERENDER_DELAY));
+};
+
+const onDataGetSuccess = (dataArray) => {
+  const getPin = () => {
+    const adArray = dataArray.slice(0, ADS_COUNT);
+    createOtherMarker(adArray);
+  };
+
+  setFilterChange(dataArray);
+  getPin();
+  return dataArray;
+};
+
+const getData = (onSuccess, onError) => {
+  fetch(SERVER_ADDRESSES.GET)
     .then((response) => response.json())
     .then((ads) => onSuccess(ads))
-    .then((ads) => createOtherMarker(ads))
-    .catch(() => onFail('Ошибка получения данных с сервера'));
+    .then((data) => {
+      const allAds = data;
+      return allAds;
+    })
+    .catch(() => onError('Ошибка получения данных с сервера'));
 };
 
 const sendData = (onSuccess, onError, body) => {
   fetch(
-    SERVER_ADDRESSES.toSend,
+    SERVER_ADDRESSES.POST,
     {
       method: 'POST',
       body,
@@ -34,4 +68,4 @@ const sendData = (onSuccess, onError, body) => {
     });
 };
 
-export {getData, sendData};
+export {getData, sendData, onDataGetSuccess};
