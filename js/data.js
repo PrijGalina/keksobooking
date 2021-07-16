@@ -34,4 +34,25 @@ const HOUSING_TYPE = {
   },
 };
 
-export {HOUSING_TYPE, adForm, filterForm, ROOMS_FOR_GUESTS_MAP, COORDINATES_TOKYO};
+const VALUE_OF_ALL_ADS = 'any';
+
+const PRICE_MAP = {
+  any: {
+    max: Infinity,
+    min: -Infinity,
+  },
+  low: {
+    max: 10000,
+    min: 0,
+  },
+  middle: {
+    max: 50000,
+    min: 10000,
+  },
+  high: {
+    max: Infinity,
+    min: 50000,
+  },
+};
+
+export {HOUSING_TYPE, adForm, filterForm, ROOMS_FOR_GUESTS_MAP, COORDINATES_TOKYO, VALUE_OF_ALL_ADS, PRICE_MAP};

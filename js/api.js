@@ -40,10 +40,6 @@ const getData = (onSuccess, onError) => {
   fetch(SERVER_ADDRESSES.GET)
     .then((response) => response.json())
     .then((ads) => onSuccess(ads))
-    .then((data) => {
-      const allAds = data;
-      return allAds;
-    })
     .catch(() => onError('Ошибка получения данных с сервера'));
 };
 
