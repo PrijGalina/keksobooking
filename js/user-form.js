@@ -1,5 +1,5 @@
 import {sendData,getData, onDataGetSuccess} from './api.js';
-import {adForm, filterForm, VALUE_OF_ALL_ADS} from './data.js';
+import { adForm, filterForm, VALUE_OF_ALL_ADS, DEFOULT_FORM_IMAGE} from './data.js';
 import {refreshMap} from './map.js';
 import { onFail } from './util.js';
 
@@ -55,6 +55,9 @@ adForm.addEventListener('reset', () => {
   filterForm.querySelectorAll('.map__filter').forEach((select) => {
     select.value = VALUE_OF_ALL_ADS;
   });
+  adForm.querySelector('.ad-form-header__avatar').src = DEFOULT_FORM_IMAGE.avatar;
+  adForm.querySelector('.ad-form__photo-img').src = DEFOULT_FORM_IMAGE.house;
+  scrollTo({ top: 0, behavior: 'smooth' });
   getData(onDataGetSuccess, onFail);
 });
 

@@ -18,7 +18,6 @@ const PinSetting = {
 };
 
 const mainPinIcon = L.icon(PinSetting.MAIN);
-
 const pinIcon = L.icon(PinSetting.REGULAR);
 let initMap = false;
 
