@@ -50,6 +50,8 @@ const onFail = (message) => {
   setTimeout(() => {
     alertContainer.classList.add('visually-hidden');
   }, ALERT_SHOW_TIME);
+
+  throw new Error('Error retrieving data from server');
 };
 
 export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getShuffledRandomLengthArray, getDeclension, onFail};

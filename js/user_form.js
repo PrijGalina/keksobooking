@@ -55,6 +55,7 @@ adForm.addEventListener('reset', () => {
   filterForm.querySelectorAll('.map__filter').forEach((select) => {
     select.value = VALUE_OF_ALL_ADS;
   });
+  scrollTo({top: 0, behavior: 'smooth'});
   getData(onDataGetSuccess, onFail);
 });
 

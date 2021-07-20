@@ -3,6 +3,7 @@ import {createOtherMarker, markerGroup} from './map.js';
 import {filterForm} from './data.js';
 import {getSortData, getFilteredData} from './filter.js';
 import {debounce} from './utils/debounce.js';
+import {togglePageActiveState} from './page-state.js';
 
 const RERENDER_DELAY = 500;
 
@@ -16,7 +17,9 @@ const ADS_COUNT = 10;
 const renderMarker = (dataQ) => {
   markerGroup.clearLayers();
   const data = getFilteredData(dataQ);
+  console.log("data",data);
   data.sort(getSortData);
+  console.log("data-sort",data);
   const filterArray = data.slice(0, ADS_COUNT);
   createOtherMarker(filterArray);
 };
@@ -30,16 +33,23 @@ const onDataGetSuccess = (dataArray) => {
     const adArray = dataArray.slice(0, ADS_COUNT);
     createOtherMarker(adArray);
   };
-
+  console.log("dataArray",dataArray);
   setFilterChange(dataArray);
   getPin();
+  togglePageActiveState(false, filterForm);
   return dataArray;
 };
 
 const getData = (onSuccess, onError) => {
   fetch(SERVER_ADDRESSES.GET)
-    .then((response) => response.json())
-    .then((ads) => onSuccess(ads))
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((ads) => {
+      onSuccess(ads);
+    })
     .catch(() => onError('Ошибка получения данных с сервера'));
 };
 

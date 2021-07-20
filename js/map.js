@@ -1,5 +1,5 @@
 import { generateAd } from './generate-ad.js';
-import { adForm, filterForm, COORDINATES_TOKYO } from './data.js';
+import { adForm, COORDINATES_TOKYO } from './data.js';
 import { togglePageActiveState } from './page-state.js';
 import { getData, onDataGetSuccess } from './api.js';
 import { onFail } from './util.js';
@@ -18,8 +18,8 @@ const PinSetting = {
 };
 
 const mainPinIcon = L.icon(PinSetting.MAIN);
-
 const pinIcon = L.icon(PinSetting.REGULAR);
+const zoomMap = 14;
 let initMap = false;
 
 const map = L.map('map-canvas')
@@ -30,7 +30,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: COORDINATES_TOKYO.lat,
     lng: COORDINATES_TOKYO.lng,
-  }, 14);
+  }, zoomMap);
 
 const myPromise = new Promise((resolve, reject) => {
   if (initMap) {
@@ -43,9 +43,6 @@ const myPromise = new Promise((resolve, reject) => {
 myPromise
   .then(() => {
     getData(onDataGetSuccess, onFail);
-  })
-  .then(() => {
-    togglePageActiveState(false, filterForm);
   })
   .catch(() => {});
 
@@ -104,7 +101,7 @@ const createOtherMarker = (adArrayData) => {
 };
 
 const refreshMap = () => {
-  map.setView(COORDINATES_TOKYO, 14);
+  map.setView(COORDINATES_TOKYO, zoomMap);
   MainMarker.setLatLng(L.latLng(COORDINATES_TOKYO.lat,COORDINATES_TOKYO.lng));
 };
 
