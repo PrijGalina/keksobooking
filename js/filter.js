@@ -25,18 +25,17 @@ const getCheckedCheckbox = () => {
   return featureCheckedCheckboxs;
 };
 
-const getRankAd = (element, list) => {
-  const adFeatures = element.offer.features;
-  const intersection = list.filter((item) => adFeatures.includes(item));
-  return intersection.length;
-};
-
 const filterByFeatures = (element) => {
   const checkedCheckboxs = getCheckedCheckbox();
   if (checkedCheckboxs.length !== 0) {
-    const elementRank = (element.offer.features) ? getRankAd(element, checkedCheckboxs) : 0;
-    if(elementRank !== 0){
-      return element;
+    if(element.offer.features){
+      let suitableAd = true;
+      checkedCheckboxs.forEach((el) => {
+        !element.offer.features.includes(el) ? suitableAd = false : '';
+      });
+      if (suitableAd) {
+        return element;
+      }
     }
   }
   else {
@@ -44,21 +43,6 @@ const filterByFeatures = (element) => {
   }
 };
 
-const getSortData = (element, elementNext) => {
-  const checkedCheckboxs = getCheckedCheckbox();
-  const rankA = (element.offer.features) ? getRankAd(element, checkedCheckboxs) : 0;
-  const rankB = (elementNext.offer.features) ? getRankAd(elementNext, checkedCheckboxs) : 0;
-  if (rankA < rankB) {
-    return 1;
-  }
-  else if (rankA > rankB){
-    return -1;
-  }
-  else {
-    return 0;
-  }
-};
-
 const getFilteredData = (pin) => pin.filter(filterByType).filter(filterByPrice).filter(filterByRooms).filter(filterByGuests).filter(filterByFeatures);
 
-export {getSortData, getFilteredData};
+export {getFilteredData};

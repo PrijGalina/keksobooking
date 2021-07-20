@@ -1,7 +1,7 @@
 
 import {createOtherMarker, markerGroup} from './map.js';
 import {filterForm} from './data.js';
-import {getSortData, getFilteredData} from './filter.js';
+import {getFilteredData} from './filter.js';
 import {debounce} from './utils/debounce.js';
 import {togglePageActiveState} from './page-state.js';
 
@@ -14,12 +14,9 @@ const SERVER_ADDRESSES = {
 
 const ADS_COUNT = 10;
 
-const renderMarker = (dataQ) => {
+const renderMarker = (dataAds) => {
   markerGroup.clearLayers();
-  const data = getFilteredData(dataQ);
-  console.log("data",data);
-  data.sort(getSortData);
-  console.log("data-sort",data);
+  const data = getFilteredData(dataAds);
   const filterArray = data.slice(0, ADS_COUNT);
   createOtherMarker(filterArray);
 };
@@ -33,7 +30,6 @@ const onDataGetSuccess = (dataArray) => {
     const adArray = dataArray.slice(0, ADS_COUNT);
     createOtherMarker(adArray);
   };
-  console.log("dataArray",dataArray);
   setFilterChange(dataArray);
   getPin();
   togglePageActiveState(false, filterForm);

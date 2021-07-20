@@ -103,6 +103,7 @@ const createOtherMarker = (adArrayData) => {
 const refreshMap = () => {
   map.setView(COORDINATES_TOKYO, zoomMap);
   MainMarker.setLatLng(L.latLng(COORDINATES_TOKYO.lat,COORDINATES_TOKYO.lng));
+  map.closePopup();
 };
 
 export {MainMarker, createOtherMarker, refreshMap, markerGroup, map};
